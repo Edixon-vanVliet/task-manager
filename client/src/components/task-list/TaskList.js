@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../card/Card";
+import { removeTask } from "../../store/slices/tasks.slice";
 
 import styles from "./TaskList.module.css";
-import { removeTask } from "../../store/slices/tasks.slice";
 
 export const TaskList = () => {
   const navigate = useNavigate();
@@ -24,7 +24,21 @@ export const TaskList = () => {
       {tasks.map((task) => (
         <Card key={task.id}>
           <div className={styles.task}>
-            <p>{task.name}</p>
+            {task.completed ? (
+              <div className={styles.title}>
+                <FontAwesomeIcon
+                  className={styles.button}
+                  title="edit"
+                  icon={faCircleCheck}
+                  color="#2c5336"
+                  onClick={() => handleEdit(task.id)}
+                />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <p style={{ textDecoration: task.completed && "line-through" }}>{task.name}</p>
+              </div>
+            ) : (
+              <p>{task.name}</p>
+            )}
             <div className={styles.controls}>
               <FontAwesomeIcon
                 className={styles.button}

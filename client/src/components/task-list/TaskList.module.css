@@ -4,6 +4,10 @@
   margin: 0.5rem 0rem;
 }
 
+.title {
+  display: flex;
+}
+
 .controls {
   display: flex;
   gap: 8px;
