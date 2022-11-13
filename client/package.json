@@ -1,5 +1,6 @@
 {
   "name": "task-manager",
+  "proxy": "http://localhost:3500/api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
