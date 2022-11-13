@@ -1,3 +1,32 @@
 body {
   background-color: #f1f3f7;
 }
+
+p {
+  margin: 0;
+}
+
+input {
+  background-color: #f1f3f7;
+  padding: 0.25rem 1rem;
+  border-radius: 5px 0px 0px 5px;
+  outline: none;
+  border: none;
+}
+
+button {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 4px 8px;
+}
+
+button.primary {
+  background-color: #5433f4;
+}
+
+button.secondary {
+  background-color: #17191a;
+}

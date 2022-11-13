@@ -20,21 +20,11 @@
 }
 
 .input {
-  background-color: #f1f3f7;
-  padding: 0.25rem 1rem;
   flex-grow: 1;
-  border-radius: 5px 0px 0px 5px;
-  outline: none;
-  border: none;
 }
 
 .button {
-  background-color: #5433f4;
-  color: white;
-  flex-grow: 1;
-  padding: 0rem;
   border-radius: 0px 5px 5px 0px;
-  outline: none;
-  border: none;
-  cursor: pointer;
+  padding: 0rem;
+  flex-grow: 1;
 }

@@ -7,7 +7,7 @@ import styles from "./TaskList.module.css";
 export const TaskList = () => (
   <Card>
     <div className={styles.task}>
-      <p className={styles.title}>Walk The Cat</p>
+      <p>Walk The Cat</p>
       <div className={styles.controls}>
         <FontAwesomeIcon className={styles.button} title="edit" icon={faEdit} color="#2c5336" />
         <FontAwesomeIcon className={styles.button} title="remove" icon={faTrash} color="#6d021d" />
