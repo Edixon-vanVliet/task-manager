@@ -1,0 +1,18 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0rem;
+}
+
+.title {
+  margin: 0px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  cursor: pointer;
+}
