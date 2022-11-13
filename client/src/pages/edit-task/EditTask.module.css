@@ -1,0 +1,38 @@
+.editTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0rem;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0rem;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formGroup :first-child {
+  flex-basis: 30%;
+}
+
+.formGroup :last-child {
+  flex-grow: 1;
+}
+
+.backButton {
+  margin-top: 4rem;
+  width: 8rem;
+}
