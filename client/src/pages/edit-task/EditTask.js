@@ -36,7 +36,7 @@ export const EditTask = () => {
           <caption className={styles.title}>Edit Task</caption>
           <div className={styles.formGroup}>
             <label>Task ID</label>
-            <p>{task.id}</p>
+            <p>{task._id}</p>
           </div>
           <div className={styles.formGroup}>
             <label>Name</label>

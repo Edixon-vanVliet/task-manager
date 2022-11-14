@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   current: {
-    id: 0,
+    _id: 0,
     name: "",
     completed: false,
   },
@@ -43,7 +43,7 @@ const tasksSlice = createSlice({
     });
     builder.addCase(putTask.fulfilled, (state, { payload: { message, success, data: updatedTask } }) => {
       state.data = state.data.map((task) => {
-        if (task.id === updatedTask.id) {
+        if (task._id === updatedTask._id) {
           return updatedTask;
         }
 
@@ -55,8 +55,8 @@ const tasksSlice = createSlice({
         success,
       };
     });
-    builder.addCase(deleteTask.fulfilled, (state, { payload: { data: id, message, success } }) => {
-      state.data = state.data.filter((task) => task.id !== id);
+    builder.addCase(deleteTask.fulfilled, (state, { payload: { data: _id, message, success } }) => {
+      state.data = state.data.filter((task) => task._id !== _id);
       state.response = {
         message,
         success,
@@ -75,9 +75,9 @@ export const fetchTasks = createAsyncThunk("tasks/fetchAll", async (_, thunkAPI)
   }
 });
 
-export const fetchTask = createAsyncThunk("tasks/fetchOne", async (id, thunkAPI) => {
+export const fetchTask = createAsyncThunk("tasks/fetchOne", async (_id, thunkAPI) => {
   try {
-    const response = await fetch(`/tasks/${id}`);
+    const response = await fetch(`/tasks/${_id}`);
 
     return await response.json();
   } catch (error) {
@@ -105,7 +105,7 @@ export const postTask = createAsyncThunk("tasks/post", async (task) => {
 
 export const putTask = createAsyncThunk("tasks/put", async (task) => {
   try {
-    const response = await fetch(`/tasks/${task.id}`, {
+    const response = await fetch(`/tasks/${task._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -119,9 +119,9 @@ export const putTask = createAsyncThunk("tasks/put", async (task) => {
   }
 });
 
-export const deleteTask = createAsyncThunk("tasks/delete", async (id) => {
+export const deleteTask = createAsyncThunk("tasks/delete", async (_id) => {
   try {
-    const response = await fetch(`/tasks/${id}`, { method: "DELETE" });
+    const response = await fetch(`/tasks/${_id}`, { method: "DELETE" });
 
     return await response.json();
   } catch (error) {

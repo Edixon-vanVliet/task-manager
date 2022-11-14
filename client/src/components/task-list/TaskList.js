@@ -13,12 +13,12 @@ export const TaskList = () => {
   const tasks = useSelector((state) => state.tasks.data);
   const dispatch = useDispatch();
 
-  const handleEdit = (id) => {
-    navigate(`/task/${id}`);
+  const handleEdit = (_id) => {
+    navigate(`/task/${_id}`);
   };
 
-  const handleRemove = (id) => {
-    dispatch(deleteTask(id));
+  const handleRemove = (_id) => {
+    dispatch(deleteTask(_id));
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const TaskList = () => {
   return (
     <>
       {tasks.map((task) => (
-        <Card key={task.id}>
+        <Card key={task._id}>
           <div className={styles.task}>
             {task.completed ? (
               <div className={styles.title}>
@@ -37,7 +37,7 @@ export const TaskList = () => {
                   title="edit"
                   icon={faCircleCheck}
                   color="#2c5336"
-                  onClick={() => handleEdit(task.id)}
+                  onClick={() => handleEdit(task._id)}
                 />
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <p style={{ textDecoration: task.completed && "line-through" }}>{task.name}</p>
@@ -51,14 +51,14 @@ export const TaskList = () => {
                 title="edit"
                 icon={faEdit}
                 color="#2c5336"
-                onClick={() => handleEdit(task.id)}
+                onClick={() => handleEdit(task._id)}
               />
               <FontAwesomeIcon
                 className={styles.button}
                 title="remove"
                 icon={faTrash}
                 color="#6d021d"
-                onClick={() => handleRemove(task.id)}
+                onClick={() => handleRemove(task._id)}
               />
             </div>
           </div>
