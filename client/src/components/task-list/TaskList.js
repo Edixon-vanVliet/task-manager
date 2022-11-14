@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../card/Card";
-import { removeTask } from "../../store/slices/tasks.slice";
+import { deleteTask, fetchTasks } from "../../store/slices/tasks.slice";
 
 import styles from "./TaskList.module.css";
+import { useEffect } from "react";
 
 export const TaskList = () => {
   const navigate = useNavigate();
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector((state) => state.tasks.data);
   const dispatch = useDispatch();
 
   const handleEdit = (id) => {
@@ -17,8 +18,13 @@ export const TaskList = () => {
   };
 
   const handleRemove = (id) => {
-    dispatch(removeTask(id));
+    dispatch(deleteTask(id));
   };
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
   return (
     <>
       {tasks.map((task) => (

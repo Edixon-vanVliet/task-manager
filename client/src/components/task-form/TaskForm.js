@@ -1,22 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../store/slices/tasks.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { postTask, updateTask } from "../../store/slices/tasks.slice";
 import { Card } from "../card/Card";
 import styles from "./TaskForm.module.css";
 
 export const TaskForm = () => {
   const dispatch = useDispatch();
-  const [task, setTask] = useState("");
+  const task = useSelector((state) => state.tasks.current);
 
-  const handleChange = ({ target: { value } }) => {
-    setTask(value);
+  const handleChange = ({ target: { value: name } }) => {
+    dispatch(updateTask({ ...task, name }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(addTask(task));
-    setTask("");
+    dispatch(postTask(task));
   };
   return (
     <Card>
@@ -28,7 +26,7 @@ export const TaskForm = () => {
             type="text"
             name="task"
             placeholder="e.g. wash dishes"
-            value={task}
+            value={task.name}
             onChange={handleChange}
           />
           <button type="submit" className={`${styles.button} primary`}>

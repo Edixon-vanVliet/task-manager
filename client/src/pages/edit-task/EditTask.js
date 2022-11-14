@@ -1,22 +1,19 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../components/card/Card";
-import { updateTask } from "../../store/slices/tasks.slice";
+import { fetchTask, putTask, updateTask } from "../../store/slices/tasks.slice";
 
 import styles from "./EditTask.module.css";
 
 export const EditTask = () => {
   const { id } = useParams();
-  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [task, setTask] = useState(
-    tasks.find((task) => task.id === parseInt(id)) || { id: 0, name: "", completed: false }
-  );
+  const { task, response } = useSelector((state) => ({ task: state.tasks.current, response: state.tasks.response }));
 
   const handleChange = ({ target: { type, checked, value, name } }) => {
-    setTask({ ...task, [name]: type === "checkbox" ? checked : value });
+    dispatch(updateTask({ ...task, [name]: type === "checkbox" ? checked : value }));
   };
 
   const handleBack = () => {
@@ -25,9 +22,12 @@ export const EditTask = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(updateTask(task));
-    handleBack();
+    dispatch(putTask(task));
   };
+
+  useEffect(() => {
+    dispatch(fetchTask(id));
+  }, [dispatch, id]);
 
   return (
     <div className={styles.editTask}>
@@ -49,6 +49,9 @@ export const EditTask = () => {
             </div>
           </div>
           <button className="primary">Edit</button>
+          <p className={styles.message} style={{ color: response.success ? "green" : "red" }}>
+            {response.message}
+          </p>
         </form>
       </Card>
 
